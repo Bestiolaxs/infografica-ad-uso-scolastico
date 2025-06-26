@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografica: Il Valore del Tempo nelle Scelte Finanziarie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .text-balance {
+             text-wrap: balance;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-black text-teal-700 tracking-tight text-balance">Il Valore del Tempo: Le Tue Scelte Finanziarie Quotidiane</h1>
+            <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto text-balance">Un'esplorazione visiva di come la matematica finanziaria modella il tuo futuro, un giorno alla volta.</p>
+        </header>
+
+        <main class="space-y-12">
+
+            <section id="fondamenti">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-teal-700">I Pilastri della Crescita Finanziaria</h2>
+                    <p class="mt-2 text-md text-slate-500 max-w-2xl mx-auto">Tutto inizia da tre concetti fondamentali. Capire come interagiscono è il primo passo per prendere il controllo delle tue finanze.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="text-5xl mb-3 text-amber-500">💰</div>
+                        <h3 class="text-xl font-bold mb-2">Capitale Iniziale (C)</h3>
+                        <p class="text-slate-600">La somma di denaro con cui inizi. È il seme del tuo albero finanziario.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="text-5xl mb-3 text-amber-500">📈</div>
+                        <h3 class="text-xl font-bold mb-2">Tasso di Interesse (i)</h3>
+                        <p class="text-slate-600">La velocità di crescita del tuo denaro, espressa in percentuale. È il nutrimento per il tuo seme.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="text-5xl mb-3 text-amber-500">⏳</div>
+                        <h3 class="text-xl font-bold mb-2">Tempo (t)</h3>
+                        <p class="text-slate-600">La durata dell'investimento. È l'ingrediente più potente per far crescere il tuo albero.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="confronto">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <div class="text-center mb-6">
+                        <h2 class="text-3xl font-bold text-teal-700">Semplice vs. Composta: Le Due Strade dell'Interesse</h2>
+                        <p class="mt-2 text-md text-slate-500 max-w-3xl mx-auto">Immagina di investire €1.000 con un tasso del 7%. Il modo in cui l'interesse viene calcolato cambia drasticamente il risultato finale. Il grafico sottostante mostra come l'interesse composto (dove guadagni interessi anche sugli interessi già maturati) supera di gran lunga l'interesse semplice nel tempo.</p>
+                    </div>
+                    <div class="chart-container h-[40vh] md:h-96 max-h-[500px]">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="potere-composto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-teal-700">La Magia dell'Interesse Composto</h2>
+                    <p class="mt-2 text-md text-slate-500 max-w-2xl mx-auto">Con l'interesse composto, non è solo il tuo capitale a lavorare, ma anche i guadagni che genera. Questo crea un effetto "palla di neve" che accelera la crescita del tuo patrimonio nel tempo.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                         <h3 class="text-2xl font-bold text-center mb-4">Crescita del Montante Anno per Anno</h3>
+                         <p class="text-slate-600 mb-6 text-center">Osserva come il montante totale cresce. Ogni anno, la crescita è leggermente maggiore dell'anno precedente, perché gli interessi si accumulano e generano nuovi interessi.</p>
+                        <div class="chart-container h-80 max-h-[400px]">
+                            <canvas id="stackedBarChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                        <h3 class="text-2xl font-bold text-center mb-4">L'Impatto di un Inizio Anticipato</h3>
+                        <p class="text-slate-600 mb-6">Iniziare a investire prima fa un'enorme differenza. Vediamo tre persone che investono €5.000 all'anno con un rendimento del 7%:</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-teal-500 font-bold text-xl mr-3">1.</span>
+                                <div>
+                                    <h4 class="font-bold">Anna (Inizia a 25 anni)</h4>
+                                    <p class="text-sm text-slate-500">Investe per 10 anni e poi si ferma. A 65 anni avrà circa <strong>€700.000</strong>.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-amber-500 font-bold text-xl mr-3">2.</span>
+                                <div>
+                                    <h4 class="font-bold">Bruno (Inizia a 35 anni)</h4>
+                                    <p class="text-sm text-slate-500">Investe per 30 anni, fino a 65. Avrà circa <strong>€540.000</strong>.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-pink-500 font-bold text-xl mr-3">3.</span>
+                                <div>
+                                    <h4 class="font-bold">Conclusione</h4>
+                                    <p class="text-sm text-slate-500">Anna, pur investendo per meno tempo e meno capitale totale (€50.000 vs €150.000 di Bruno), accumula molto di più. Il suo denaro ha avuto <strong>più tempo per crescere</strong>.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="attualizzazione">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                         <div class="text-center">
+                            <h2 class="text-3xl font-bold text-teal-700">Quanto Vale il Futuro, Oggi?</h2>
+                            <p class="mt-2 text-md text-slate-600">L'attualizzazione è il processo inverso: calcola il valore attuale di una somma futura. Se qualcuno ti promette €10.000 tra 5 anni, quanto valgono realmente oggi, considerando un tasso del 5%? La risposta è <strong>€7.835,26</strong>.</p>
+                            <p class="mt-4 text-sm text-slate-500">Questo concetto è cruciale per valutare investimenti e capire se un'offerta futura è davvero conveniente rispetto a una somma disponibile subito.</p>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-6 bg-slate-100 rounded-lg">
+                            <div class="text-center">
+                                <p class="text-slate-500">Valore Futuro (tra 5 anni)</p>
+                                <p class="text-5xl font-black text-slate-800 my-2">€10.000</p>
+                            </div>
+                            <div class="text-5xl my-4 text-teal-600 transform -rotate-90 md:rotate-0">➔</div>
+                             <div class="text-center">
+                                <p class="text-teal-700 font-bold">Valore Attuale (Oggi)</p>
+                                <p class="text-5xl font-black text-teal-600 my-2">€7.835</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="scelte-quotidiane">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-teal-700">Il Potere di un Caffè Risparmiato</h2>
+                    <p class="mt-2 text-md text-slate-500 max-w-2xl mx-auto">Le piccole scelte quotidiane possono avere un impatto enorme nel lungo periodo. Cosa succederebbe se investissi €3 al giorno (circa €90 al mese) invece di spenderli?</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">€3 al giorno per 20 anni</h3>
+                            <p class="text-slate-600 mb-4">Investendo €90 al mese per 20 anni con un rendimento annuo composto del 7%, il risultato è sorprendente. Il capitale versato è solo una parte del totale accumulato. La parte più grande è l'interesse, il "denaro che ha lavorato per te".</p>
+                            <div class="mt-6 space-y-3">
+                                <div class="p-4 bg-amber-100 rounded-lg">
+                                    <p class="font-bold">Capitale Versato:</p>
+                                    <p class="text-2xl font-bold text-amber-700">€21.600</p>
+                                </div>
+                                 <div class="p-4 bg-teal-100 rounded-lg">
+                                    <p class="font-bold">Interessi Guadagnati:</p>
+                                    <p class="text-2xl font-bold text-teal-700">€25.867</p>
+                                </div>
+                                <div class="p-4 bg-slate-200 rounded-lg">
+                                    <p class="font-bold">Montante Totale:</p>
+                                    <p class="text-3xl font-extrabold text-slate-800">€47.467</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container h-80 max-h-[450px]">
+                             <canvas id="dailyChoiceChart"></canvas>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 py-8 border-t border-slate-200">
+            <p class="text-slate-500">Questa infografica è uno strumento didattico per illustrare i concetti base della matematica finanziaria.</p>
+            <p class="text-sm text-slate-400 mt-2">I rendimenti sono ipotetici e non garantiti. Consulta sempre un professionista prima di fare investimenti.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const FONT_COLOR = '#334155';
+            const GRID_COLOR = '#E2E8F0';
+            
+            const PALETTE = {
+                teal: '#14B8A6',
+                amber: '#F59E0B',
+                slate: '#64748B',
+                pink: '#EC4899'
+            };
+
+            function wrapLabel(str, maxWidth) {
+                if (typeof str !== 'string' || str.length <= maxWidth) {
+                    return str;
+                }
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    if (currentLine.length + words[i].length + 1 < maxWidth) {
+                        currentLine += ' ' + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            }
+
+            const tooltipConfig = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            };
+
+            const chartDefaultOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR,
+                            font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                         ...tooltipConfig.plugins.tooltip,
+                         backgroundColor: '#FFFFFF',
+                         titleColor: '#1E293B',
+                         bodyColor: '#334155',
+                         borderColor: '#E2E8F0',
+                         borderWidth: 1,
+                         padding: 10,
+                         cornerRadius: 6,
+                         displayColors: true,
+                         boxPadding: 4
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: FONT_COLOR,
+                             font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        },
+                        grid: {
+                            color: GRID_COLOR
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: FONT_COLOR,
+                             font: {
+                                family: "'Inter', sans-serif"
+                            },
+                             callback: function(value) {
+                                return '€' + value.toLocaleString('it-IT');
+                            }
+                        },
+                        grid: {
+                            color: GRID_COLOR
+                        }
+                    }
+                }
+            };
+            
+            if (document.getElementById('comparisonChart')) {
+                const years = 30;
+                const principal = 1000;
+                const rate = 0.07;
+                const labels = Array.from({ length: years + 1 }, (_, i) => `Anno ${i}`);
+                const simpleInterestData = Array.from({ length: years + 1 }, (_, i) => principal * (1 + rate * i));
+                const compoundInterestData = Array.from({ length: years + 1 }, (_, i) => principal * Math.pow(1 + rate, i));
+
+                new Chart(document.getElementById('comparisonChart'), {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Interesse Composto',
+                                data: compoundInterestData,
+                                borderColor: PALETTE.teal,
+                                backgroundColor: PALETTE.teal + '33',
+                                tension: 0.1,
+                                fill: true,
+                                pointRadius: 0,
+                                pointHoverRadius: 5
+                            },
+                            {
+                                label: 'Interesse Semplice',
+                                data: simpleInterestData,
+                                borderColor: PALETTE.amber,
+                                backgroundColor: PALETTE.amber + '33',
+                                tension: 0.1,
+                                fill: false,
+                                pointRadius: 0,
+                                pointHoverRadius: 5
+                            }
+                        ]
+                    },
+                    options: chartDefaultOptions
+                });
+            }
+
+            if (document.getElementById('stackedBarChart')) {
+                const years = 10;
+                const principal = 5000;
+                const rate = 0.07;
+                const labels = Array.from({ length: years }, (_, i) => `Anno ${i + 1}`);
+                const interestData = [];
+                let lastYearTotal = principal;
+
+                for(let i=0; i<years; i++) {
+                    let newTotal = lastYearTotal * (1+rate);
+                    interestData.push(newTotal - principal);
+                    lastYearTotal = newTotal;
+                }
+
+                new Chart(document.getElementById('stackedBarChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Capitale Iniziale',
+                                data: Array(years).fill(principal),
+                                backgroundColor: PALETTE.amber,
+                                stack: 'Stack 0',
+                            },
+                            {
+                                label: 'Interessi Accumulati',
+                                data: interestData,
+                                backgroundColor: PALETTE.teal,
+                                stack: 'Stack 0',
+                            },
+                        ]
+                    },
+                    options: {
+                        ...chartDefaultOptions,
+                        scales: {
+                           ...chartDefaultOptions.scales,
+                           x: { ...chartDefaultOptions.scales.x, stacked: true },
+                           y: { ...chartDefaultOptions.scales.y, stacked: true }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('dailyChoiceChart')) {
+                new Chart(document.getElementById('dailyChoiceChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: [
+                            wrapLabel('Capitale Versato Totale', 16),
+                            wrapLabel('Interessi Guadagnati', 16)
+                        ],
+                        datasets: [{
+                            label: 'Composizione del Risparmio',
+                            data: [21600, 25867],
+                            backgroundColor: [
+                                PALETTE.amber,
+                                PALETTE.teal
+                            ],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 4,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                         plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: FONT_COLOR,
+                                    font: { family: "'Inter', sans-serif" },
+                                    padding: 20
+                                }
+                            },
+                           tooltip: { ...chartDefaultOptions.plugins.tooltip }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
